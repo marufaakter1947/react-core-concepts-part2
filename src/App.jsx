@@ -4,6 +4,7 @@ import Batsman from './Bartsman';
 import Users from './Users';
 import { Suspense } from 'react';
 import Friends from './Friends';
+import Posts from './Posts';
 // 1.just write a simple fetch with json conversion
 const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users").then(res=>res.json())
 
@@ -12,8 +13,14 @@ const fetchFriends = async()=>{
   return res.json();
 }
 
+const fetchPosts = async () =>{
+const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+return res.json();
+}
 
 function App() {
+
+  const postsPromise = fetchPosts();
 
   const friendsPromise = fetchFriends();
 
@@ -36,6 +43,12 @@ alert(newNum);
       
       <h3>Vite + React</h3>
       {/* // Wrap the data loading component under suspense */}
+
+      <Suspense fallback={<h4>Posts are coming.....</h4>} >
+        <Posts postsPromise={postsPromise}></Posts>
+      </Suspense>
+
+
       <Suspense fallback={<h3>Loading....</h3>}>
       <Users fetchUsers={fetchUsers} ></Users>
       </Suspense>
