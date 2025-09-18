@@ -5,6 +5,7 @@ import Users from './Users';
 import { Suspense } from 'react';
 import Friends from './Friends';
 import Posts from './Posts';
+import Players from './Players';
 // 1.just write a simple fetch with json conversion
 const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users").then(res=>res.json())
 
@@ -43,6 +44,8 @@ alert(newNum);
       
       <h3>Vite + React</h3>
       {/* // Wrap the data loading component under suspense */}
+
+      <Players></Players>
 
       <Suspense fallback={<h4>Posts are coming.....</h4>} >
         <Posts postsPromise={postsPromise}></Posts>
